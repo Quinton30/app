@@ -4,6 +4,8 @@ const studentRoutes = require('./src/movie/routes')
 const app = express()
 const port = 3000
 
+app.disable('x-powered-by');
+
 // Enable CORS for all origins
 app.use(cors({ origin: '*' }))
 app.use(express.json())
