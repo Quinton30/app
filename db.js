@@ -1,4 +1,5 @@
 const { Pool } = require('pg')
+require('dotenv').config();
 
 /*const pool = new Pool({
   user: 'students_fqe5_user',
@@ -10,16 +11,17 @@ const { Pool } = require('pg')
     rejectUnauthorized: false,
   },
 }) Expired Database*/
+
 const pool = new Pool({
-  user: 'postgres.auqsxkehosbvhviedypm',
-  host: 'aws-0-us-east-2.pooler.supabase.com',
-  database: 'postgres',
-  password: '#5@w$MM5SdSG8CK',
-  port: 5432,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: parseInt(process.env.PG_PORT, 10),
   ssl: {
-    rejectUnauthorized: false,
+    rejectUnauthorized: process.env.PG_SSL_REJECT_UNAUTHORIZED === 'true',
   },
-})
+});
 
 pool.on('connect', () => {
   console.log('Successfully connected to the database')
